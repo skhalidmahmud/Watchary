@@ -1,3 +1,10 @@
-i need a master page for my django app, there have a top bar containing a logo and a navigation bar, and a footer at the bottom of the page. The content of the page should be dynamic, meaning that it can change based on the view being rendered.
+> i need a master page for my django app, there have a top bar containing a logo and a navigation bar, and a footer at the bottom of the page. The content of the page should be dynamic, meaning that it can change based on the view being rendered.
 nav bar should have links to home, new, popular, and a search bar from left to right. The logo should be on the left side of the top bar. The navigation bar should be responsive and collapse into a hamburger menu on smaller screens. and the most left side of the nav bar have a sign in button that redirects to the sign page. and then aling signin bar with a three dots icon on the right side of the nav bar. The three dots icon should open a dropdown menu with options for about and contact.
 The footer should contain copyright information. Use Bootstrap for styling.
+
+> in my django project, i need a loat of card view for my movie app there show all types of movies and tv shows.
+importent note: i already done to make a mastar.html that use bootstrap for styles. and now i currently work just on my home pages block part that contain only content body (navber and footer make on master folder using bootstrap
+now specifically i need a 150px * 250px card view that show all movies that i add on my database name (maybe movies and TVserise). on database have a image for my my movies/tv serises, name, total seson (for tv serises), launching year, rating (IMDb), age rating, producer name and run time (on minutes)
+so i need to show card on normaly in just image as full background, name with a background color, and year for movies, total episodes and for tv serises, and must every card needed to mention (on botom left) that this is a movie or tv serises.
+and must need a little hover add that can make maybe 20-50% (that are starnded) blur, little shadow, and on Hobar mode... need to show extra information like duration and more if that show good.
+and make sure all of the card element last load on active window mode, do not show all of the element from database on same time, if anyone is called around then show new elements with nice animation.
