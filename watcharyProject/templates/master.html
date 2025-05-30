@@ -1,0 +1,106 @@
+<!-- i need a master page for my django app, there have a top bar containing a logo and a navigation bar, and a footer at the bottom of the page. The content of the page should be dynamic, meaning that it can change based on the view being rendered.
+nav bar should have links to home, new, popular, and a search bar from left to right. The logo should be on the left side of the top bar. The navigation bar should be responsive and collapse into a hamburger menu on smaller screens. and the most left side of the nav bar have a sign in button that redirects to the sign page. and then aling signin bar with a three dots icon on the right side of the nav bar. The three dots icon should open a dropdown menu with options for about and contact.
+The footer should contain copyright information. Use Bootstrap for styling. -->
+
+
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Watchary{% endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .navbar-brand img {
+            height: 40px;
+        }
+        .footer {
+            background: #f8f9fa;
+            padding: 1rem 0;
+            text-align: center;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+        @media (max-width: 991.98px) {
+            .navbar .search-bar {
+                width: 100%;
+                margin-top: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body class="d-flex flex-column min-vh-100">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <!-- Logo -->
+            <a class="navbar-brand" href="{% url 'home' %}">
+                <img src="{% static 'logo.png' %}" alt="Logo">
+            </a>
+            <!-- Hamburger -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent"
+                    aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <!-- Navbar content -->
+            <div class="collapse navbar-collapse" id="navbarContent">
+                <!-- Left: Sign In -->
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0 align-items-lg-center">
+                    <li class="nav-item">
+                        <a class="btn btn-outline-primary me-2" href="{% url 'signin' %}">Sign In</a>
+                    </li>
+                    <!-- Links -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'home' %}">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'new' %}">New</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'popular' %}">Popular</a>
+                    </li>
+                </ul>
+                <!-- Search bar -->
+                <form class="d-flex search-bar me-3" method="get" action="{% url 'search' %}">
+                    <input class="form-control me-2" type="search" placeholder="Search" name="q" aria-label="Search">
+                    <button class="btn btn-outline-success" type="submit">Search</button>
+                </form>
+                <!-- Right: Three dots dropdown -->
+                <ul class="navbar-nav mb-2 mb-lg-0">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                                class="bi bi-three-dots-vertical" viewBox="0 0 16 16">
+                                <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/>
+                            </svg>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="{% url 'about' %}">About</a></li>
+                            <li><a class="dropdown-item" href="{% url 'contact' %}">Contact</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main class="flex-shrink-0 container my-4">
+        {% block content %}
+        <!-- Dynamic content goes here -->
+        {% endblock %}
+    </main>
+
+    <footer class="footer mt-auto">
+        <div class="container">
+            <span class="text-muted">&copy; {{ year|default:2025 }} Watchary. All rights reserved.</span>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
