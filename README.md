@@ -1,3 +1,10 @@
+## Super User
+> User name = admin
+> Password = admin
+
+---
+
+
 # Html page
 
 
