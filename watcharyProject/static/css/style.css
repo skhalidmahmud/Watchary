@@ -1,0 +1,23 @@
+.navbar-brand img {
+    height: 40px;
+}
+.footer {
+    background: #ff6a00aa;
+    padding: 1rem 0;
+    text-align: center;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+}
+@media (max-width: 991.98px) {
+    .navbar .search-bar {
+        width: 100%;
+        margin-top: 0.5rem;
+    }
+}
+.custom-navbar {
+    background-color: #ff6a0088; /* change to any hex, rgb, or named color */
+}
+.main-content {
+    background-color: #0c4f91; /* light background for the main content */
+}
