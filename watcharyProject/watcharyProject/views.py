@@ -14,3 +14,5 @@ def search(request):
     return render(request, 'search.html')
 def sign_in(request):
     return render(request, 'signin.html')
+def addMovies(request):
+    return render(request, 'addMovies.html')

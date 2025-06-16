@@ -12,4 +12,5 @@ urlpatterns = [
     path('popular/', popular, name='popular'),
     path('search/', search, name='search'),
     path('signin/', sign_in, name='signin'),
+    path('addMovies/', addMovies, name='addMovies')
 ]
