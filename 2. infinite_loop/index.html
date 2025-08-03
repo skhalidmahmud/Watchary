@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Movie Poster Gallery</title>
+  <link rel="stylesheet" href="css/bootstrap.min.css" />
+  <style>
+    /* Card Container (Grid Layout) */
+    .card-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      gap: 20px;
+      justify-items: center;
+      margin-top: 20px;
+    }
+
+    /* Individual Card */
+    .card {
+      width: 170px;
+      height: 250px;
+      border: 3px solid transparent; /* Start with no border */
+      border-radius: 10px;
+      overflow: hidden;
+      position: relative;
+      transition: transform 0.3s ease, box-shadow 0.3s ease, border 0.3s ease;
+    }
+
+    /* Image Style (Normal) */
+    .card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+
+    /* Card Hover Effects: Border, Blur, Zoom */
+    .card:hover {
+      border: 3px solid #007bff; /* Show border on hover */
+    }
+
+    .card:hover img {
+      filter: blur(90%); /* Apply blur on hover */
+      transform: scale(1.3); /* Zoom effect */
+    }
+
+    /* Card Content */
+    .card-content {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(0, 0, 0, 0.4);
+      color: white;
+      padding: 10px;
+      text-align: center;
+      font-size: 14px;
+      opacity: 0; /* Hide content initially */
+      transition: opacity 0.3s ease;
+    }
+
+    /* Button in Card */
+    .card-content button {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      padding: 5px 10px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 12px;
+      width: 100%;
+      margin-top: 10px;
+      transition: background-color 0.3s ease;
+    }
+
+    .card-content button:hover {
+      background-color: #0056b3;
+    }
+
+    /* Show content when hovering */
+    .card:hover .card-content {
+      opacity: 1;
+    }
+
+    /* Modal Body */
+    .modal-body {
+      display: flex;                /* Enable flexbox */
+      justify-content: center;      /* Center horizontally */
+      align-items: center;          /* Center vertically */
+      padding: 0;                   /* Remove padding to use full space */
+      height: 100%;                 /* Ensure the modal body takes full height */
+    }
+
+    .modal-body img {
+      width: 60vw;                  /* Set width relative to viewport */
+      height: auto;                 /* Maintain aspect ratio */
+      max-height: 70vh;             /* Limit maximum height */
+      object-fit: cover;            /* Ensure the image fills the container without stretching */
+      margin: 0 auto;               /* Auto margin to horizontally center image */
+      border-radius: 10px;          /* Rounded corners */
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <section class="py-5">
+    <div class="container">
+      <div class="card-container">
+        <!-- Movie Card 1 -->
+        <div class="card">
+          <img src="img/a poster.jpg" alt="Movie Poster 1">
+          <div class="card-content">
+            <h5>Physical Health</h5>
+            <p>Exercise!</p>
+            <button data-toggle="modal" data-target="#movieModal1">View More</button>
+          </div>
+        </div>
+
+        <!-- Movie Card 2 -->
+        <div class="card">
+          <img src="img/gallery-img-04.jpg" alt="Movie Poster 2">
+          <div class="card-content">
+            <h5>Physical Health</h5>
+            <p>Exercise!</p>
+            <button data-toggle="modal" data-target="#movieModal2">View More</button>
+          </div>
+        </div>
+
+        <!-- Add more movie cards here (Dynamic with Django Loop) -->
+        {% for movie in movies %}
+        <div class="card">
+          <img src="{{ movie.poster_url }}" alt="{{ movie.title }}">
+          <div class="card-content">
+            <h5>{{ movie.title }}</h5>
+            <p>{{ movie.short_description }}</p>
+            <button data-toggle="modal" data-target="#movieModal{{ movie.id }}">View More</button>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+
+  <!-- Modal for Movie 1 -->
+  <div class="modal fade" id="movieModal1" tabindex="-1" role="dialog" aria-labelledby="movieModal1Label" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-body">
+          <img src="img/Avengers_Endgame.jpeg" alt="Movie Poster 1">          
+        </div>
+        <div>
+            <div class="text-center mt-3">
+            <h4>Movie Title 1</h4>
+            <p><strong>Genre:</strong> Action, Adventure</p>
+            <p><strong>Release Date:</strong> 2024</p>
+            <p><strong>Description:</strong> Full description about the movie goes here.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal for Movie 2 -->
+  <div class="modal fade" id="movieModal2" tabindex="-1" role="dialog" aria-labelledby="movieModal2Label" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-body">
+          <img src="img/Some_Other_Movie.jpg" alt="Movie Poster 2">
+          <div class="text-center mt-3">
+            <h4>Movie Title 2</h4>
+            <p><strong>Genre:</strong> Comedy, Drama</p>
+            <p><strong>Release Date:</strong> 2023</p>
+            <p><strong>Description:</strong> Full description about the movie goes here.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/jquery-1.9.1.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+</body>
+</html>
